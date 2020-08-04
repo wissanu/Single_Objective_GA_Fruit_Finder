@@ -7,8 +7,6 @@
 # constrain : (x1*ราคา)+(x2*ราคา)+(x_*ราคา)+(xภ*ราคา)+(xถ*ราคา) <= 1,000
 # x1,x2,...,x5 = quantity of each product
 # ====================
-# !!! NOTE : No Duplicate check
-# =====================
 
 from Fruit.chromosome import Chromosome
 from Fruit import reprocude as ga
@@ -18,7 +16,7 @@ gene_num = 5
 pop_num = 20
 versus = 0.2
 max_count_item = 15
-number_generation = 100
+number_generation = 100000
 # ------------ Don't change ---------------
 current_list = []
 best_chromosome = []
@@ -32,6 +30,7 @@ if __name__ == '__main__':
         g.initial_pop()
         current_list.append(g)
 
+    # generation loop start
     for gen in range(1, number_generation+1):
         print('generation', gen)
 
@@ -60,11 +59,29 @@ if __name__ == '__main__':
             # Calculate fitness of child object
             child1.fitness_finder()
             child2.fitness_finder()
-
+            
+            # check duplicate and constraint
             if child1.fitness <= 1000 and len(next_list) < pop_num:
-                next_list.append(child1)
+                if len(next_list) == 0:
+                    next_list.append(child1)
+                else:
+                    count = 0
+                    for _ in next_list:
+                        if child1.chromosome != _.chromosome:
+                            count += 1
+                    if count == len(next_list):
+                        next_list.append(child1)
             if child2.fitness <= 1000 and len(next_list) < pop_num:
-                next_list.append(child2)
+                if len(next_list) == 0:
+                    next_list.append(child2)
+                else:
+                    count = 0
+                    for _ in next_list:
+                        if child2.chromosome != _.chromosome:
+                            count += 1
+                    if count == len(next_list):
+                        next_list.append(child2)
+
 
         # clear memory and reuse current_list
         current_list.clear()
