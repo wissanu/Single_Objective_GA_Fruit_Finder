@@ -8,3 +8,13 @@ Method included
 - cycle crossover
 - Tournament Selection ( the candidate is 20% from total population )
 - Elitism
+
+
+Constrain
+- 0 <= x1,x2,x3,x4,x5 <= 15
+- (x1*cost1) + (x2*cost2) + (x2*cost3) + (x3*cost4) + (x4*cost5) <= 1000
+- cost1 = 10
+- cost2 = 5
+- cost3 = 30
+- cost4 = 50
+- cost5 = 55
