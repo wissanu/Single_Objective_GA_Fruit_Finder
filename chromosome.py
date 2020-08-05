@@ -29,8 +29,8 @@ class Chromosome:
         self.fitness = sum(temp)
 
     @staticmethod
-    def tournament_selection(versus, chromosome, pop_num, max_count_item):
-        k = [randint(0, max_count_item) for _ in range(int(versus * pop_num))]
+    def tournament_selection(versus, chromosome, pop_num):
+        k = [randint(0, pop_num-1) for _ in range(int(versus * pop_num))]
         best = []
         for _ in k:
             if not best or best.fitness < chromosome[_].fitness:
