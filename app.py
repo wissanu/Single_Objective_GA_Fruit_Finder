@@ -13,9 +13,9 @@ from Fruit import reprocude as ga
 
 # -------- Setting parameter --------
 gene_num = 5
-pop_num = 20
+pop_num = 100
 versus = 0.2
-max_count_item = 15
+max_count_item = 40
 number_generation = 100000
 # ------------ Don't change ---------------
 current_list = []
@@ -45,8 +45,8 @@ if __name__ == '__main__':
         while len(next_list) < pop_num:
 
             # select parents
-            parent1 = Chromosome.tournament_selection(versus, current_list, pop_num, max_count_item)
-            parent2 = Chromosome.tournament_selection(versus, current_list, pop_num, max_count_item)
+            parent1 = Chromosome.tournament_selection(versus, current_list, pop_num)
+            parent2 = Chromosome.tournament_selection(versus, current_list, pop_num)
 
             # create object child1 and child2
             child1 = Chromosome(gene_num, pop_num, max_count_item)
@@ -59,29 +59,17 @@ if __name__ == '__main__':
             # Calculate fitness of child object
             child1.fitness_finder()
             child2.fitness_finder()
-            
+
             # check duplicate and constraint
             if child1.fitness <= 1000 and len(next_list) < pop_num:
-                if len(next_list) == 0:
+                check_dup = [1 for _ in next_list if child1.chromosome != _.chromosome]
+                if sum(check_dup) == len(next_list):
                     next_list.append(child1)
-                else:
-                    count = 0
-                    for _ in next_list:
-                        if child1.chromosome != _.chromosome:
-                            count += 1
-                    if count == len(next_list):
-                        next_list.append(child1)
-            if child2.fitness <= 1000 and len(next_list) < pop_num:
-                if len(next_list) == 0:
-                    next_list.append(child2)
-                else:
-                    count = 0
-                    for _ in next_list:
-                        if child2.chromosome != _.chromosome:
-                            count += 1
-                    if count == len(next_list):
-                        next_list.append(child2)
 
+            if child2.fitness <= 1000 and len(next_list) < pop_num:
+                check_dup = [1 for _ in next_list if child2.chromosome != _.chromosome]
+                if sum(check_dup) == len(next_list):
+                    next_list.append(child2)
 
         # clear memory and reuse current_list
         current_list.clear()
