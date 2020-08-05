@@ -5,9 +5,11 @@ In each of fruit has cost.
 
 
 Method included
-- cycle crossover
-- Tournament Selection ( the candidate is 20% from total population )
-- Elitism
+- cycle crossover (v1)
+- Tournament Selection ( the candidate is 20% from total population ) (both)
+- Elitism (both)
+- mutation swap (v2)
+- crossove and mutation rate , 70% and 10% (v2)
 
 
 Constrain
