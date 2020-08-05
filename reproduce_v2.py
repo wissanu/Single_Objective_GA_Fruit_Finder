@@ -3,7 +3,6 @@ from random import randint
 def single_point(a, b, gene_num):
     point = randint(0, gene_num - 1)
     a[:point], b[:point] = b[:point], a[:point]
-    a[point:], b[point:] = b[point:], a[point:]
     return a, b
 
 
