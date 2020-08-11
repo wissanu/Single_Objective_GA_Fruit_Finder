@@ -22,11 +22,7 @@ class Chromosome:
                 break
 
     def fitness_finder(self):
-        temp = []
-        for x, y in zip(self.chromosome, self.equation_input):
-            k = x * y
-            temp.append(k)
-        self.fitness = sum(temp)
+        self.fitness = sum([x*y for x,y in zip(self.chromosome, self.equation_input)])
 
     @staticmethod
     def tournament_selection(versus, chromosome, pop_num):
